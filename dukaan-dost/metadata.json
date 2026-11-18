@@ -1,0 +1,6 @@
+{
+  "name": "Dukaan Dost",
+  "description": "AI-powered digital shop management assistant for grocery and kiryana store owners in Pakistan.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
