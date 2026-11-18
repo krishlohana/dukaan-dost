@@ -41,12 +41,43 @@ The application is built with a clean, component-driven architecture separating 
 
 ```text
 dukaan-dost/
-├── src/
-│   ├── components/       # Reusable UI elements (Navbar, StatCards, Modals, Tables)
-│   ├── pages/            # Core application views (Dashboard, Inventory, POS, Khata)
-│   ├── context/          # Global state & CRUD actions for store data
-│   ├── services/         # Browser storage abstraction layer (localStorage helpers)
-│   ├── types/            # Data models for Products, Sales, and Customers
-│   └── App.tsx           # Main routing and layout shell
-├── public/               # Static assets and icons
-└── package.json          # Dependencies and build scripts
+├── server.ts                          # Express server entry point (API routes + Vite/dist serving)
+├── package.json                       # Dependencies & scripts (dev, build, start, lint)
+├── index.html                         # App title, metadata & fonts (Plus Jakarta Sans, JetBrains Mono)
+├── metadata.json                      # App manifest & microphone permission config
+├── vite.config.ts                     # Vite + Tailwind CSS build config
+├── tsconfig.json                      # TypeScript configuration
+│
+├── backend/
+│   ├── routes/
+│   │   ├── healthRoutes.ts            # GET /api/health, POST /api/health/test-firebase
+│   │   ├── shopRoutes.ts              # CRUD & ledger APIs: dashboard, sales, customers, payments,
+│   │   │                              # products, stock, expenses, reports, settings
+│   │   └── aiRoutes.ts                # POST /api/ai/command, /confirm, /cancel, /insights, /transcribe
+│   └── services/
+│       ├── firebaseClient.ts          # Firebase app & Firestore initialization
+│       ├── firestoreService.ts        # All Firestore queries, atomic transactions, stock & profit math
+│       └── geminiService.ts           # Structured JSON NLU parser, voice transcription, business advisor
+│
+└── src/
+    ├── main.tsx                       # React entry point
+    ├── App.tsx                        # Global state, view routing (8 tabs) & backend data sync
+    ├── index.css                      # Tailwind CSS setup
+    ├── types/
+    │   └── shop.ts                    # Shared TypeScript interfaces (Product, Customer, SaleRecord, etc.)
+    ├── lib/
+    │   └── api.ts                     # Centralized frontend API client calling /api/*
+    ├── utils/
+    │   └── format.ts                  # PKR formatting, date/time helpers, expiry day calculations
+    └── components/
+        ├── Layout.tsx                 # Responsive shell (desktop sidebar + mobile nav drawer)
+        ├── EmptyState.tsx             # Clean empty-state cards (no fake/mock data)
+        └── views/
+            ├── DashboardView.tsx      # Daily summary KPIs, Red Expiry Notice, Low-Stock & Recent Txns
+            ├── AiAssistantView.tsx    # WhatsApp-style chat, Voice Mic, Confirmation Cards
+            ├── SalesView.tsx          # Inventory-linked POS, inline customer add, PNG Receipt download
+            ├── CustomersView.tsx      # Digital Khata ledger, repayments (Wasooli), WhatsApp reminders
+            ├── InventoryView.tsx      # Product catalog, Expiry Red Alerts, Stock Prediction, Restock
+            ├── ExpensesView.tsx       # Categorized expense tracking & totals
+            ├── ReportsView.tsx        # Sales periods, Gross/Net Profit, Top Products, AI Insights
+            └── SettingsView.tsx       # Shop profile & live Server/Firebase/Gemini health checks
