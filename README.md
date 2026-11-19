@@ -3,6 +3,8 @@ A modular, shop management &amp; POS web application built for local retail busi
 
 # 🏪 Dukaan Dost
 
+https://dukaandost.ai.studio/
+
 **Your Digital Companion for Smart Shop Management**
 
 **Dukaan Dost** is a modular, local-first shop management and Point of Sale (POS) application built to help small and medium retail shopkeepers digitize daily operations—tracking inventory, recording sales, and managing customer credit (*khata*) without relying on complex hardware or constant internet connectivity.
